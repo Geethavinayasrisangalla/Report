@@ -1,5 +1,42 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+@model IEnumerable<FarmManagement.Web.Models.ViewModels.YieldAnalyticsViewModels>
+
 @{
+    ViewData["Title"] = "Yield Report";
+}
+
+<h2>Field‑Wise Yield Report</h2>
+
+<p>
+    This report shows the total and average yield produced per field.
+</p>
+
+@if (Model == null || !Model.Any())
+{
+    <div class="alert alert-warning">
+        No yield report data found.
+    </div>
+}
+else
+{
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr>
+                <th>Field</th>
+                <th>Area Size</th>
+                <th>Total Yield</th>
+                <th>Average Yield</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var report in Model)
+            {
+                <tr>
+                    <td>@report.FieldName</td>
+                    <td>@report.AreaSize</td>
+                    <td>@report.TotalYield</td>
+                    <td>@report.AverageYield</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
