@@ -1,15 +1,21 @@
 namespace FarmManagement.Web.Models.ViewModels
 {
-    public class YieldAnalyticsViewModel
+    public class YieldAnalyticsViewModels
     {
-        public string FieldName { get; set; }
+        public int FieldId { get; set; }
+        public string FieldName { get; set; } = string.Empty;
 
         public double AreaSize { get; set; }
 
-        public double TotalHarvested { get; set; }
+        // ✅ Use decimal to match HarvestedQuantity
+        public decimal TotalYield { get; set; }
 
-        public double AverageYield { get; set; }
-
-        public double CalculatedEfficiency { get; set; }
+        public decimal AverageYield
+        {
+            get
+            {
+                return AreaSize == 0 ? 0 : TotalYield / (decimal)AreaSize;
+            }
+        }
     }
 }
